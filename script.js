@@ -26,6 +26,7 @@ const typeController = (e) => {
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
+    errorCount++
     return display.removeChild(display.lastChild);
   }
 
@@ -37,17 +38,17 @@ const typeController = (e) => {
   if (!validLetters.includes(newLetter)) {
     return;
   }
-
+  
   userText += newLetter;
-
+  
   const newLetterCorrect = validate(newLetter);
-
+  
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
   }
-
+  
   // check if given question text is equal to user typed text
   if (questionText === userText) {
     gameOver();
